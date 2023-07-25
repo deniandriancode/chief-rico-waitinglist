@@ -25,7 +25,7 @@
 
 	<form on:submit|preventDefault={subscribe}>
 	  <input class="bg-transparent focus:border-transparent focus:ring-current focus:outline-transparent
-					w-96"
+					w-54 md:w-96"
 			 type="email" bind:value={email} placeholder="Enter you email"/>
 	  <button class="my-4 sm:my-0 py-3 sm:py-0 sm:h-full md:w-auto px-4 bg-indigo-800 hover:bg-indigo-700 focus:bg-indigo-700"
 			  type="submit">Notify Me</button>
