@@ -1,6 +1,4 @@
 <script>
-  import * as Validator from 'validatorjs';
-  
   let email = "";
   let emailUnvalid = false;
   let successRegister = false;
@@ -8,20 +6,25 @@
   let bgIdx = items[Math.floor(Math.random() * items.length)];;
   let bgGif = `backgroundWallpaper__${bgIdx}`;
 
-  function subscribe() {
-	let data = { email: email };
-	let rules = { email: 'required|email' };
-	let validation = new Validator(data, rules);
+    function validateEmail(inputText) {
+        let mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+        if(inputText.match(mailformat)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
-	try {
-	  validation.passes();
-	  email = "";
-	  emailUnvalid = false;
-	  successRegister = true;
-	} catch (e) {
-	  emailUnvalid = true;
-	  successRegister = false;
-	}
+  function subscribe() {
+      let valid = validateEmail(email);
+      if (valid) {
+          emailUnvalid = false;
+          successRegister = true;
+      } else {
+          emailUnvalid = true;
+          successRegister = false;
+          email = "";
+      }
 	
   }
 
@@ -41,7 +44,7 @@
 
   <div
 	class="overlay
-		   absolute h-screen w-screen bg-black opacity-[75%]">
+		   absolute h-screen w-screen bg-black opacity-[63%]">
   </div>
 
   <section
@@ -53,16 +56,16 @@
 		   flex flex-col justify-center items-center"
 	>
 	<h1
-	  class="text-2xl md:text-4xl font-extrabold text-center py-4 my-4 px-4 border-4 border-white
-			 font-['Dosis']"
+	  class="text-2xl md:text-4xl text-center py-4 my-4 px-4 border-4 border-white
+			 font-['Alfa_Slab_One']"
 	  >CHIEF RICO</h1>
 	<h1
 	  class="text-4xl md:text-6xl tracking-tight font-extrabold text-center"
 	  >Our website is launching soon</h1>
-	<p class="text-l md:text-xl text-center py-4 font-thin opacity-75">We are working hard to make an awesome website with lot of intutive features. Subscribe below to get notified when we launch and get some huge discounts as a beta tester.</p>
+	<p class="text-l md:text-xl text-center py-4 font-thin text-current75">We are working hard to make an awesome website with lot of intutive features. Subscribe below to get notified when we launch and get some huge discounts as a beta tester.</p>
 
 	{#if emailUnvalid}
-	  <div class="fadeIn__animation flex items-center p-4 mb-4 text-sm text-red-600 rounded-lg bg-gray-900 opacity-[.8]"
+	  <div class="fadeIn__animation flex items-center p-4 mb-4 text-sm text-red-600 rounded-lg bg-gray-900/[.8]"
           role="button"
 		   on:click={hideThisElement}>
 		<svg class="flex-shrink-0 inline w-4 h-4 mr-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
@@ -72,11 +75,12 @@
 		<div>
 		  <span class="font-bold">Email is not valid!</span> Please enter a valid email address.
 		</div>
-	  </div>
-	{:else if successRegister}
-	  <div class="fadeIn__animation flex items-center p-4 mb-4 text-sm text-green-400 rounded-lg bg-gray-900 opacity-[.8]"
+      </div>
+    {/if}
+	{#if successRegister}
+	  <div class="fadeIn__animation flex items-center p-4 mb-4 text-sm text-green-400 rounded-lg bg-gray-900/[.8]"
           role="button"
-		   on:click|stopPropagation={hideThisElement}>
+		   on:click={hideThisElement}>
 		<svg class="flex-shrink-0 inline w-4 h-4 mr-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
 		  <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
 		</svg>
