@@ -20,10 +20,10 @@
       if (valid) {
           emailUnvalid = false;
           successRegister = true;
+          email = "";
       } else {
           emailUnvalid = true;
           successRegister = false;
-          email = "";
       }
 	
   }
