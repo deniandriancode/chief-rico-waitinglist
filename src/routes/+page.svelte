@@ -5,7 +5,8 @@
   let emailUnvalid = false;
   let successRegister = false;
   let items = [1, 2, 3];
-  let bg = items[Math.floor(Math.random() * items.length)];;
+  let bgIdx = items[Math.floor(Math.random() * items.length)];;
+  let bgGif = `backgroundWallpaper__${bgIdx}`;
 
   function subscribe() {
 	let data = { email: email };
@@ -35,7 +36,7 @@
 </svelte:head>
 
 <main
-  class={`h-full bg-center bg-cover bg-no-repeat bg-[url('/space-${bg}.gif')] text-white`}
+    class={`h-full bg-center bg-cover bg-no-repeat ${bgGif} text-white`}
   >
 
   <div
@@ -61,7 +62,8 @@
 	<p class="text-l md:text-xl text-center py-4 font-thin opacity-75">We are working hard to make an awesome website with lot of intutive features. Subscribe below to get notified when we launch and get some huge discounts as a beta tester.</p>
 
 	{#if emailUnvalid}
-	  <div class="fadeIn__animation flex items-center p-4 mb-4 text-sm text-red-800 rounded-lg bg-gray-900 dark:text-red-400 opacity-[.8]" role="alert"
+	  <div class="fadeIn__animation flex items-center p-4 mb-4 text-sm text-red-600 rounded-lg bg-gray-900 opacity-[.8]"
+          role="button"
 		   on:click={hideThisElement}>
 		<svg class="flex-shrink-0 inline w-4 h-4 mr-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
 		  <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
@@ -72,7 +74,8 @@
 		</div>
 	  </div>
 	{:else if successRegister}
-	  <div class="fadeIn__animation flex items-center p-4 mb-4 text-sm text-green-900 rounded-lg bg-gray-900 dark:text-green-400 opacity-[.8]" role="alert"
+	  <div class="fadeIn__animation flex items-center p-4 mb-4 text-sm text-green-400 rounded-lg bg-gray-900 opacity-[.8]"
+          role="button"
 		   on:click|stopPropagation={hideThisElement}>
 		<svg class="flex-shrink-0 inline w-4 h-4 mr-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
 		  <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
@@ -104,6 +107,18 @@
 </main>
 
 <style>
+    .backgroundWallpaper__1 {
+        background-image: url('/space-1.gif');
+    }
+
+    .backgroundWallpaper__2 {
+        background-image: url('/space-2.gif');
+    }
+
+    .backgroundWallpaper__3 {
+        background-image: url('/space-3.gif');
+    }
+
   .fadeIn__animation {
 	animation: fadeIn 500ms ease;
   }
